@@ -1,0 +1,409 @@
+html {
+  scroll-padding-top: 76px;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% -8rem, rgba(111, 66, 193, 0.34), transparent 18rem),
+    linear-gradient(180deg, #040214 0%, #071125 44%, #040214 100%);
+}
+
+body::before {
+  opacity: 0.11;
+  background-size: 34px 34px;
+}
+
+.container,
+.container.narrow {
+  width: calc(100vw - 28px);
+  max-width: calc(100vw - 28px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-header {
+  min-height: 66px;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(4, 2, 20, 0.74);
+  border-bottom: 1px solid rgba(169, 143, 255, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+.site-header.scrolled,
+.site-header.nav-open {
+  background: rgba(4, 2, 20, 0.94);
+}
+
+.brand {
+  gap: 9px;
+  letter-spacing: 0.04em;
+}
+
+.brand img {
+  width: 52px;
+  height: 30px;
+}
+
+.brand span {
+  max-width: 150px;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+.header-actions {
+  gap: 8px;
+}
+
+.icon-link,
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-toggle {
+  display: grid;
+}
+
+.mobile-nav {
+  position: fixed;
+  inset: 66px 10px auto;
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(8, 6, 28, 0.96);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  transform: translateY(-10px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.mobile-nav a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: rgba(248, 248, 255, 0.76);
+  font-size: 0.78rem;
+}
+
+.mobile-nav a.active {
+  color: white;
+  background: rgba(111, 66, 193, 0.22);
+}
+
+.hero {
+  min-height: 100svh;
+  align-items: end;
+  padding: 88px 0 22px;
+}
+
+.hero-media img {
+  object-position: 63% center;
+  filter: saturate(0.72) brightness(0.5) contrast(1.1);
+}
+
+.hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(4, 2, 20, 0.18) 0%, rgba(4, 2, 20, 0.5) 28%, rgba(4, 2, 20, 0.94) 78%, #040214 100%),
+    linear-gradient(90deg, rgba(4, 2, 20, 0.9), rgba(4, 2, 20, 0.16));
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  width: auto;
+}
+
+.hero-copy,
+.hero-lead {
+  max-width: 100%;
+}
+
+.hero-copy,
+.page-hero,
+.section,
+.site-footer {
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p,
+summary,
+strong {
+  overflow-wrap: anywhere;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  font-size: 0.64rem;
+  line-height: 1.55;
+  letter-spacing: 0.1em;
+}
+
+h1 {
+  margin-bottom: 16px;
+  font-size: clamp(3.18rem, 17.2vw, 4.85rem);
+  line-height: 0.84;
+}
+
+.hero-lead {
+  margin-bottom: 20px;
+  font-size: clamp(1.02rem, 5vw, 1.22rem);
+  line-height: 1.46;
+}
+
+.hero-actions-row {
+  display: grid;
+  gap: 10px;
+}
+
+.btn {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.btn:hover {
+  transform: none;
+}
+
+.event-panel {
+  padding: 18px;
+  gap: 14px;
+  border-radius: 8px;
+  background: rgba(10, 8, 30, 0.86);
+  backdrop-filter: blur(16px);
+}
+
+.event-panel div {
+  padding-bottom: 14px;
+}
+
+.event-panel span {
+  font-size: 0.7rem;
+}
+
+.event-panel strong {
+  font-size: 0.98rem;
+}
+
+.page {
+  padding-top: 66px;
+}
+
+.page-hero,
+.page-hero.compact,
+.about-hero {
+  padding: 44px 0 30px;
+  background:
+    linear-gradient(150deg, rgba(7, 27, 58, 0.7), rgba(4, 2, 20, 0.98)),
+    radial-gradient(circle at 100% 0%, rgba(111, 66, 193, 0.28), transparent 15rem);
+}
+
+.page-hero h1,
+.about-hero h1 {
+  font-size: clamp(1.72rem, 8.2vw, 2.34rem);
+  line-height: 1;
+}
+
+.page-hero p:not(.eyebrow) {
+  margin-top: 14px;
+  font-size: 0.96rem;
+  line-height: 1.62;
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.hero-note {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.hero-note p {
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
+.mini-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.mini-stats span {
+  min-height: 36px;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+}
+
+.section {
+  padding: 48px 0;
+}
+
+.section.muted {
+  background: rgba(11, 11, 25, 0.52);
+}
+
+.split,
+.feature-grid,
+.role-grid,
+.committee-grid,
+.application-grid,
+.footer-grid {
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.split h2,
+.section-head h2 {
+  font-size: clamp(1.58rem, 8.2vw, 2.26rem);
+  line-height: 1.04;
+}
+
+.section-head {
+  margin-bottom: 18px;
+}
+
+.prose p {
+  font-size: 0.98rem;
+  line-height: 1.72;
+}
+
+.feature-card,
+.role-card,
+.committee-card,
+.application-card {
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.26);
+}
+
+.feature-card span,
+.role-card span,
+.committee-card span {
+  margin-bottom: 16px;
+  font-size: 0.78rem;
+}
+
+.feature-card h3,
+.role-card h3,
+.committee-card h2,
+.application-card h2 {
+  font-size: 1.12rem;
+}
+
+.committee-card h2,
+.application-card h2 {
+  font-size: clamp(1.3rem, 7vw, 1.82rem);
+}
+
+.feature-card p,
+.role-card p,
+.committee-card p,
+.application-card p,
+.application-card li,
+.faq-list p {
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
+.application-card {
+  min-height: 0;
+}
+
+.application-card ul {
+  margin: 12px 0 20px;
+}
+
+.application-card li {
+  padding: 10px 0;
+}
+
+.faq-list {
+  gap: 10px;
+}
+
+.faq-list details {
+  padding: 0 16px;
+  border-radius: 8px;
+}
+
+.faq-list summary {
+  padding: 18px 32px 18px 0;
+  font-size: 0.96rem;
+  line-height: 1.35;
+}
+
+.site-footer {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.footer-grid {
+  padding: 34px 0 24px;
+}
+
+.site-footer nav,
+.footer-contact {
+  gap: 8px;
+}
+
+.footer-bottom {
+  padding: 16px 0 24px;
+  line-height: 1.5;
+}
+
+.js .reveal {
+  transform: translateY(18px);
+  transition-duration: 520ms;
+}
+
+body.loaded .hero-copy {
+  animation: mobileSlideIn 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+body.loaded .event-panel {
+  animation: mobileSlideIn 460ms 70ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+body.loaded .page-hero .container {
+  animation: none;
+}
+
+@keyframes mobileSlideIn {
+  from {
+    opacity: 1;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
