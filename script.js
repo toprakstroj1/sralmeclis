@@ -1,4 +1,5 @@
-const GOOGLE_FORM_URL = "https://forms.gle/REPLACE_WITH_SRAL_MECLIS_FORM";
+const DELEGATE_FORM_URL = "https://forms.gle/REPLACE_WITH_DELEGE_FORM";
+const ORGANIZATION_FORM_URL = "https://forms.gle/REPLACE_WITH_ORGA_FORM";
 
 const header = document.querySelector(".site-header");
 const menuButton = document.querySelector(".menu-toggle");
@@ -38,8 +39,12 @@ if (menuButton && mobileNav) {
   });
 }
 
-document.querySelectorAll(".js-apply-link").forEach((link) => {
-  link.href = GOOGLE_FORM_URL;
+document.querySelectorAll(".js-delegate-apply-link").forEach((link) => {
+  link.href = DELEGATE_FORM_URL;
+});
+
+document.querySelectorAll(".js-organization-apply-link").forEach((link) => {
+  link.href = ORGANIZATION_FORM_URL;
 });
 
 document.querySelectorAll(".faq-list details").forEach((detail) => {
