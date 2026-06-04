@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#174a41" />
+  <text x="50" y="120" fill="#fff" font-size="48" font-family="Segoe UI, Roboto, Arial">Dış İşleri Komitesi</text>
+  <g opacity="0.12"><rect x="40" y="180" width="1120" height="500" fill="#fff" rx="20" /></g>
+</svg>
