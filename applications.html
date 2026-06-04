@@ -42,7 +42,7 @@
               <li>Komite çalışmaları</li>
               <li>Tartışma ve karar süreci</li>
             </ul>
-            <a class="btn primary js-delegate-apply-link" href="#" target="_blank" rel="noopener">Delege Başvurusu</a>
+            <a class="btn primary js-delegate-apply-link" href="#delege-basvuru-formu">Delege Başvurusu</a>
           </article>
 
           <article class="application-card">
@@ -56,12 +56,95 @@
               <li>Ekip çalışması</li>
               <li>Sorumluluk alma</li>
             </ul>
-            <a class="btn primary js-organization-apply-link" href="#" target="_blank" rel="noopener">Organizasyon Başvurusu</a>
+            <a class="btn primary js-organization-apply-link" href="#organizasyon-basvuru-formu">Organizasyon Başvurusu</a>
           </article>
 
         </div>
       </section>
+
+      <section class="section application-form-section" data-application-section aria-live="polite" hidden>
+        <div class="container">
+          <div class="application-form-shell" id="delege-basvuru-formu" data-application-panel="delegate" hidden>
+            <div class="form-panel-head">
+              <div>
+                <p class="eyebrow">Delege Başvurusu</p>
+                <h2>Temsilci bilgileri</h2>
+              </div>
+              <button class="form-close" type="button" data-close-application aria-label="Formu kapat">×</button>
+            </div>
+            <form class="application-form" data-google-form="delegate">
+              <div class="form-grid">
+                <label>Ad Soyad<input type="text" name="fullName" autocomplete="name" required /></label>
+                <label>Okul<input type="text" name="school" required /></label>
+                <label>Sınıf<input type="text" name="grade" required /></label>
+                <label>Şehir<input type="text" name="city" autocomplete="address-level2" required /></label>
+                <label>Telefon<input type="tel" name="phone" autocomplete="tel" required /></label>
+                <label>E-posta<input type="email" name="email" autocomplete="email" required /></label>
+                <label class="form-wide">Komisyon Tercihi
+                  <select name="committee" required>
+                    <option value="" selected disabled>Komisyon seçin</option>
+                    <option value="anayasa">Ana Yasa Komisyonu</option>
+                    <option value="milli eğitim">Milli Eğitim Komisyonu</option>
+                    <option value="dış işleri">Dış İşleri Komisyonu</option>
+                  </select>
+                </label>
+                <label class="form-wide">Daha önce katıldığı etkinlikler (varsa)<textarea name="pastEvents" rows="3"></textarea></label>
+                <label class="form-wide">Motivasyon yazısı<textarea name="motivation" rows="5" required></textarea></label>
+              </div>
+              <div class="form-consents">
+                <label><input type="checkbox" name="kvkk" value="onaylıyorum" required /> KVKK kapsamında verilerimin başvuru değerlendirmesi için işlenmesini onaylıyorum.</label>
+                <label><input type="checkbox" name="rules" value="onaylıyorum" required /> Kuralları kabul ediyorum.</label>
+              </div>
+              <div class="form-actions">
+                <button class="btn primary" type="submit">Başvuruyu Gönder</button>
+                <p class="form-status" role="status"></p>
+              </div>
+            </form>
+          </div>
+
+          <div class="application-form-shell" id="organizasyon-basvuru-formu" data-application-panel="organization" hidden>
+            <div class="form-panel-head">
+              <div>
+                <p class="eyebrow">Organizasyon Başvurusu</p>
+                <h2>Ekip görev bilgileri</h2>
+              </div>
+              <button class="form-close" type="button" data-close-application aria-label="Formu kapat">×</button>
+            </div>
+            <form class="application-form" data-google-form="organization">
+              <div class="form-grid">
+                <label>Ad Soyad<input type="text" name="fullName" autocomplete="name" required /></label>
+                <label>Okul<input type="text" name="school" required /></label>
+                <label>Sınıf<input type="text" name="grade" required /></label>
+                <label>Telefon<input type="tel" name="phone" autocomplete="tel" required /></label>
+                <label>E-posta<input type="email" name="email" autocomplete="email" required /></label>
+                <label>Görev Alanı
+                  <select name="team" required>
+                    <option value="" selected disabled>Görev alanı seçin</option>
+                    <option value="ent team">Entertainment team (Eğlence Ekibi)</option>
+                    <option value="press team">Press team (Basın Ekibi)</option>
+                    <option value="secu team">Security team (Güvenlik Ekibi)</option>
+                    <option value="staff team">Staff team (Personel Ekibi)</option>
+                  </select>
+                </label>
+                <label class="form-wide">Daha önce görev aldığı etkinlikler (varsa)<textarea name="pastDuties" rows="4"></textarea></label>
+              </div>
+              <div class="form-actions">
+                <button class="btn primary" type="submit">Başvuruyu Gönder</button>
+                <p class="form-status" role="status"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <div class="success-overlay" data-success-overlay hidden>
+      <div class="success-card" role="status" aria-live="polite">
+        <span class="success-mark" aria-hidden="true">✓</span>
+        <p class="eyebrow">Başvuru Alındı</p>
+        <h2>Başvurunuz başarıyla alınmıştır.</h2>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <div class="container footer-grid">

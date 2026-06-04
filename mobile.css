@@ -347,6 +347,85 @@ h1 {
   padding: 10px 0;
 }
 
+.application-form-section {
+  padding-top: 0;
+}
+
+.application-form-shell {
+  padding: 18px;
+  border-radius: 8px;
+}
+
+.form-panel-head,
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.form-panel-head {
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+}
+
+.form-panel-head h2,
+.success-card h2 {
+  font-size: clamp(1.35rem, 7vw, 1.9rem);
+}
+
+.form-close {
+  width: 42px;
+  height: 42px;
+}
+
+.form-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.application-form label {
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+}
+
+.application-form input,
+.application-form select,
+.application-form textarea {
+  min-height: 50px;
+  font-size: 0.96rem;
+}
+
+.form-consents {
+  padding: 14px;
+}
+
+.form-consents label {
+  font-size: 0.88rem;
+}
+
+.form-actions {
+  grid-template-columns: 1fr;
+}
+
+.form-status {
+  min-height: 22px;
+  font-size: 0.88rem;
+}
+
+.success-overlay {
+  padding: 14px;
+}
+
+.success-card {
+  padding: 26px 18px;
+}
+
+.success-mark {
+  width: 64px;
+  height: 64px;
+  font-size: 2rem;
+}
+
 .faq-list {
   gap: 10px;
 }

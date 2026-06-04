@@ -1,5 +1,33 @@
-const DELEGATE_FORM_URL = "https://forms.gle/REPLACE_WITH_DELEGE_FORM";
-const ORGANIZATION_FORM_URL = "https://forms.gle/REPLACE_WITH_ORGA_FORM";
+const GOOGLE_FORM_CONFIG = {
+  delegate: {
+    action: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSebhDsQZEjijmU_XJUd3JmatUfvLahXArNdkZqIrbPTHT5zyA/formResponse",
+    fields: {
+      fullName: "entry.1195773260",
+      school: "entry.1634678355",
+      grade: "entry.672345504",
+      city: "entry.349572039",
+      phone: "entry.609958197",
+      email: "entry.1132695763",
+      committee: "entry.408007731",
+      pastEvents: "entry.870462628",
+      motivation: "entry.884955708",
+      kvkk: "entry.1083711685",
+      rules: "entry.1380587051",
+    },
+  },
+  organization: {
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSe0M-gvhr4PktAOCei-6RGIF8CVqFQwRgrqTU1_zpqzQVAOZw/formResponse",
+    fields: {
+      fullName: "entry.1552026436",
+      school: "entry.744654958",
+      grade: "entry.1047678088",
+      phone: "entry.1690729962",
+      email: "entry.1328916332",
+      pastDuties: "entry.2009642363",
+      team: "entry.727950834",
+    },
+  },
+};
 
 const header = document.querySelector(".site-header");
 const menuButton = document.querySelector(".menu-toggle");
@@ -39,13 +67,169 @@ if (menuButton && mobileNav) {
   });
 }
 
+const applicationPanels = document.querySelectorAll("[data-application-panel]");
+const applicationSection = document.querySelector("[data-application-section]");
+const successOverlay = document.querySelector("[data-success-overlay]");
+let confettiTimer;
+
+function showApplicationPanel(type) {
+  const targetPanel = document.querySelector(`[data-application-panel="${type}"]`);
+  if (!targetPanel) return;
+
+  if (applicationSection) applicationSection.hidden = false;
+
+  applicationPanels.forEach((panel) => {
+    const isTarget = panel === targetPanel;
+    panel.hidden = !isTarget;
+    panel.classList.toggle("is-opening", isTarget);
+  });
+
+  window.setTimeout(() => targetPanel.classList.remove("is-opening"), 520);
+  targetPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  targetPanel.querySelector("input, select, textarea")?.focus({ preventScroll: true });
+}
+
 document.querySelectorAll(".js-delegate-apply-link").forEach((link) => {
-  link.href = DELEGATE_FORM_URL;
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showApplicationPanel("delegate");
+  });
 });
 
 document.querySelectorAll(".js-organization-apply-link").forEach((link) => {
-  link.href = ORGANIZATION_FORM_URL;
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showApplicationPanel("organization");
+  });
 });
+
+document.querySelectorAll("[data-close-application]").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.closest("[data-application-panel]").hidden = true;
+    if (applicationSection) applicationSection.hidden = true;
+  });
+});
+
+function isGoogleFormConfigured(config) {
+  if (!config?.action || config.action.includes("REPLACE_WITH")) return false;
+  return Object.values(config.fields).every((fieldName) => fieldName && !fieldName.includes("REPLACE"));
+}
+
+function createHiddenField(name, value) {
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = name;
+  input.value = value;
+  return input;
+}
+
+function getFieldValue(field) {
+  if (field.type === "checkbox") {
+    return field.checked ? field.value : "";
+  }
+
+  return field.value.trim();
+}
+
+function postToGoogleForm(form, config) {
+  return new Promise((resolve) => {
+    const frameName = `google-form-target-${Date.now()}`;
+    const iframe = document.createElement("iframe");
+    const proxyForm = document.createElement("form");
+
+    iframe.name = frameName;
+    iframe.hidden = true;
+    proxyForm.hidden = true;
+    proxyForm.method = "POST";
+    proxyForm.action = config.action;
+    proxyForm.target = frameName;
+
+    Object.entries(config.fields).forEach(([fieldName, googleEntryName]) => {
+      const field = form.elements[fieldName];
+      if (!field) return;
+      proxyForm.appendChild(createHiddenField(googleEntryName, getFieldValue(field)));
+    });
+
+    document.body.append(iframe, proxyForm);
+
+    let resolved = false;
+    const finish = () => {
+      if (resolved) return;
+      resolved = true;
+      proxyForm.remove();
+      iframe.remove();
+      resolve();
+    };
+
+    iframe.addEventListener("load", finish, { once: true });
+    window.setTimeout(finish, 1600);
+    proxyForm.submit();
+  });
+}
+
+function launchConfetti() {
+  const colors = ["#a98fff", "#6f42c1", "#f8f8ff", "#7dd3fc", "#f0abfc"];
+  window.clearTimeout(confettiTimer);
+
+  for (let index = 0; index < 70; index += 1) {
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
+    piece.style.setProperty("--x", `${Math.random() * 100}vw`);
+    piece.style.setProperty("--c", colors[index % colors.length]);
+    piece.style.setProperty("--d", `${1.9 + Math.random() * 1.5}s`);
+    piece.style.setProperty("--drift", `${(Math.random() - 0.5) * 220}px`);
+    piece.style.transform = `rotate(${Math.random() * 180}deg)`;
+    document.body.appendChild(piece);
+    piece.addEventListener("animationend", () => piece.remove(), { once: true });
+  }
+}
+
+function showSuccess() {
+  if (!successOverlay) return;
+  successOverlay.hidden = false;
+  launchConfetti();
+
+  confettiTimer = window.setTimeout(() => {
+    successOverlay.hidden = true;
+  }, 2800);
+}
+
+document.querySelectorAll(".application-form").forEach((form) => {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const formType = form.dataset.googleForm;
+    const config = GOOGLE_FORM_CONFIG[formType];
+    const status = form.querySelector(".form-status");
+
+    if (!isGoogleFormConfigured(config)) {
+      if (status) status.textContent = "Google Form bağlantısı henüz yapılandırılmadı.";
+      return;
+    }
+
+    form.classList.add("is-sending");
+    if (status) status.textContent = "Başvurunuz gönderiliyor...";
+
+    await postToGoogleForm(form, config);
+
+    form.classList.remove("is-sending");
+    if (status) status.textContent = "";
+    form.reset();
+    form.closest("[data-application-panel]").hidden = true;
+    if (applicationSection) applicationSection.hidden = true;
+    showSuccess();
+  });
+});
+
+if (window.location.hash === "#delege-basvuru-formu") {
+  showApplicationPanel("delegate");
+}
+
+if (window.location.hash === "#organizasyon-basvuru-formu") {
+  showApplicationPanel("organization");
+}
 
 document.querySelectorAll(".faq-list details").forEach((detail) => {
   detail.addEventListener("toggle", () => {
