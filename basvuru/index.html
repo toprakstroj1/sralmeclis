@@ -119,9 +119,17 @@
                 <label>Şehir<input type="text" name="city" autocomplete="address-level2" required /></label>
                 <label>Telefon<input type="tel" name="phone" autocomplete="tel" required /></label>
                 <label>E-posta<input type="email" name="email" autocomplete="email" required /></label>
-                <label class="form-wide">Komisyon Tercihi
-                  <select name="committee" required>
+                <label class="form-wide">Komisyon Tercihi (1. tercih)
+                  <select name="committee" id="committee-first" required>
                     <option value="" selected disabled>Komisyon seçin</option>
+                    <option value="anayasa">Ana Yasa Komisyonu</option>
+                    <option value="milli eğitim">Milli Eğitim Komisyonu</option>
+                    <option value="dış işleri">Dış İşleri Komisyonu</option>
+                  </select>
+                </label>
+                <label class="form-wide">Komisyon Tercihi (2. tercih)
+                  <select name="committee2" id="committee-second" required>
+                    <option value="" selected disabled>İkinci tercih komisyonu seçin</option>
                     <option value="anayasa">Ana Yasa Komisyonu</option>
                     <option value="milli eğitim">Milli Eğitim Komisyonu</option>
                     <option value="dış işleri">Dış İşleri Komisyonu</option>
