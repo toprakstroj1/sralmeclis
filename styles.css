@@ -965,6 +965,17 @@ h1 {
   border-top: 1px solid rgba(169, 143, 255, 0.14);
   color: rgba(248, 248, 255, 0.52);
   font-size: 0.86rem;
+.footer-contacts-inline {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: 1rem;
+}
+.footer-contacts-inline a {
+  font-size: 0.95rem;
+  line-height: 1;
+  text-decoration: none;
+}
 }
 
 .js .reveal {
