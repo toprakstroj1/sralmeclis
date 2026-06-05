@@ -1,6 +1,5 @@
 const GOOGLE_FORM_CONFIG = {
   delegate: {
-    action: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSebhDsQZEjijmU_XJUd3JmatUfvLahXArNdkZqIrbPTHT5zyA/formResponse",
     fields: {
       fullName: "entry.1195773260",
       school: "entry.1634678355",
@@ -9,11 +8,11 @@ const GOOGLE_FORM_CONFIG = {
       phone: "entry.609958197",
       email: "entry.1132695763",
       committee: "entry.408007731",
-      committee2: "entry.20479171",
       pastEvents: "entry.870462628",
       motivation: "entry.884955708",
       kvkk: "entry.1083711685",
       rules: "entry.1380587051",
+        committee2: "entry.20479171"
     },
   },
   organization: {

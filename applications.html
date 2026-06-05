@@ -120,13 +120,21 @@
                 <label>Telefon<input type="tel" name="phone" autocomplete="tel" required /></label>
                 <label>E-posta<input type="email" name="email" autocomplete="email" required /></label>
                 <label class="form-wide">Komisyon Tercihi (1. tercih)
-                  <select name="committee" id="committee-first" required>
-                    <option value="" selected disabled>Komisyon seçin</option>
-                    <option value="anayasa">Ana Yasa Komisyonu</option>
-                    <option value="milli eğitim">Milli Eğitim Komisyonu</option>
-                    <option value="dış işleri">Dış İşleri Komisyonu</option>
+                    <select name="committee" id="committee-first" required>
+                      <option value="" selected disabled>-- Birinci Komisyon Seçiniz --</option>
+                      <option value="anayasa">Anayasa</option>
+                      <option value="meb">Milli Eğitim</option>
+                      <option value="dis">Dışişleri</option>
                   </select>
                 </label>
+                  <label class="form-wide">Komisyon Tercihi (2. tercih)
+                    <select name="committee2" id="committee-second" required>
+                      <option value="" selected disabled>-- İkinci Komisyon Seçiniz --</option>
+                      <option value="anayasa">Anayasa</option>
+                      <option value="meb">Milli Eğitim</option>
+                      <option value="dis">Dışişleri</option>
+                    </select>
+                  </label>
                 <label class="form-wide">Komisyon Tercihi (2. tercih)
                   <select name="committee2" id="committee-second" required>
                     <option value="" selected disabled>İkinci tercih komisyonu seçin</option>
@@ -195,7 +203,7 @@
 
     <footer class="site-footer">
       <div class="container footer-grid">
-        <div><a class="footer-brand" href="/anasayfa/">SRAL Meclis</a><p>Türkiye Büyük Millet Meclisi Simülasyonu</p></div>
+        <div><a class="footer-brand" href="/anasayfa/">SRAL Meclis — TBMM Simülasyonu</a><p>Türkiye Büyük Millet Meclisi Simülasyonu</p></div>
         <nav aria-label="Alt navigasyon"><a href="/anasayfa/">Ana Sayfa</a><a href="/hakkinda/">Hakkında</a><a href="/komiteler/">Komiteler</a><a href="/sik-sorulan/">SSS</a></nav>
         <div class="footer-contact"><a href="mailto:sralmeclis@gmail.com">sralmeclis@gmail.com</a><a href="https://instagram.com/sralmeclis26" target="_blank" rel="noopener noreferrer">@sralmeclis26</a></div>
       </div>
