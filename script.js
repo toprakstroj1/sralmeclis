@@ -9,6 +9,7 @@ const GOOGLE_FORM_CONFIG = {
       phone: "entry.609958197",
       email: "entry.1132695763",
       committee: "entry.408007731",
+      committee2: "entry.20479171",
       pastEvents: "entry.870462628",
       motivation: "entry.884955708",
       kvkk: "entry.1083711685",
@@ -239,6 +240,47 @@ document.querySelectorAll(".faq-list details").forEach((detail) => {
     });
   });
 });
+
+// Prevent selecting the same committee for both first and second preferences
+function wireCommitteePreferenceControls(root = document) {
+  const first = root.querySelector('#committee-first');
+  const second = root.querySelector('#committee-second');
+  if (!first || !second) return;
+
+  const updateSecondOptions = () => {
+    const val = first.value;
+    Array.from(second.options).forEach((opt) => {
+      if (!opt.value) return; // skip placeholder
+      opt.disabled = val && opt.value === val;
+    });
+    // If currently selected second is now disabled, reset it
+    if (second.value && second.querySelector(`option[value="${second.value}"]`).disabled) {
+      second.value = "";
+    }
+  };
+
+  first.addEventListener('change', updateSecondOptions);
+  // Also update on reset of the containing form
+  const form = first.closest('form');
+  if (form) {
+    form.addEventListener('reset', () => {
+      // small timeout to allow native reset to complete
+      setTimeout(() => {
+        Array.from(second.options).forEach((opt) => opt.disabled = false);
+      }, 0);
+    });
+  }
+}
+
+// Wire controls on initial load and when dynamic panels open
+document.addEventListener('DOMContentLoaded', () => wireCommitteePreferenceControls(document));
+// When application panel is shown, re-wire within that panel
+const origShow = showApplicationPanel;
+window.showApplicationPanel = function (type) {
+  origShow(type);
+  const target = document.querySelector(`[data-application-panel="${type}"]`);
+  if (target) wireCommitteePreferenceControls(target);
+};
 
 const revealItems = document.querySelectorAll(".reveal");
 
